@@ -1,4 +1,4 @@
-# cinema-web
+# horarios-web
 
 > A Vue.js project
 
