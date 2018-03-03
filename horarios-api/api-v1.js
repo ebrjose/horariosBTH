@@ -1,6 +1,6 @@
 'use strict'
 
-const debug = require('debug')('cinema:api:routes')
+const debug = require('debug')('horarios:api:routes')
 const express = require('express')
 const asyncify = require('express-asyncify')
 const auth = require('express-jwt')

@@ -30,9 +30,9 @@ module.exports = {
 $ npm install
 
 # Para iniciarla base de datos localhost:6801
-$ npm run setup
+$ npm run setupdb
 
-# Para coorrer el servidor  with hot reload at localhost:6801
-$ npm run start-dev
+# Para correr el servidor  en localhost:6801
+$ npm run server
 
 ```

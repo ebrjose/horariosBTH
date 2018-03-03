@@ -1,41 +1,25 @@
 'use strict'
 
 const setupDatabase = require('./lib/db')
-const setupUserModel = require('./models/user')
-const setupRoomModel = require('./models/room')
-const setupReservationModel = require('./models/reservation')
 
-const setupUser = require('./lib/userFn')
-const setupRoom = require('./lib/roomFn')
-const setupReservation = require('./lib/reservationFn')
+const setupDocenteModel = require('./models/Docentes')
+const setupAulaModel = require('./models/Aulas')
+const setupMateriaModel = require('./models/Materias')
+
+const setupDocentes = require('./lib/docentes')
+const setupAulas = require('./lib/aulas')
+const setupMaterias = require('./lib/materias')
 // const defaults = require('defaults')
 
 module.exports = async (config) => {
-  const sequelize = setupDatabase(config)
-  const UserModel = setupUserModel(config)
-  const RoomModel = setupRoomModel(config)
-  const ReservationModel = setupReservationModel(config)
+  const sequelize     = setupDatabase(config)
 
-  UserModel.belongsToMany(RoomModel, {
-    through: {
-      model: ReservationModel,
-      unique: false,
-      scope: {
-        taggable: 'user'
-      }
-    },
-    foreignKey: 'userId',
-    constraints: false
-  })
+  const DocenteModel = setupDocenteModel(config)
+  const AulaModel    = setupAulaModel(config)
+  const MateriaModel = setupMateriaModel(config)
 
-  RoomModel.belongsToMany(UserModel, {
-    through: {
-      model: ReservationModel,
-      unique: false
-    },
-    foreignKey: 'roomId',
-    constraints: false
-  })
+  
+  DocenteModel.hasOne(MateriaModel, { foreignKey: 'dId' })
 
   await sequelize.authenticate() // sequelize.authenticate().then()
 
@@ -43,13 +27,13 @@ module.exports = async (config) => {
     await sequelize.sync({ force: true })
   }
 
-  const User = setupUser(UserModel)
-  const Room = setupRoom(RoomModel)
-  const Reservation = setupReservation(ReservationModel)
+  const Docentes = setupDocentes(DocenteModel)
+  const Aulas = setupAulas(AulaModel)
+  const Materias = setupMaterias(MateriaModel)
 
   return {
-    User,
-    Room,
-    Reservation
+    Docentes,
+    Aulas,
+    Materias
   }
 }

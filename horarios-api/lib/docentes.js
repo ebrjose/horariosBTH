@@ -1,5 +1,5 @@
 'use strict'
-module.exports = (UserModel) => {
+module.exports = (DocenteModel) => {
   async function createOrUpdate (user) {
     const cond = {
       where: {

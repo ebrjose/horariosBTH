@@ -5,8 +5,8 @@
   "main": "api-server.js",
   "scripts": {
     "lint": "standard",
-    "setup": "DEBUG=cinema:* node db-setup.js",
-    "start-dev": "DEBUG=cinema:* nodemon api-server.js"
+    "setupdb": "DEBUG=horarios:* node db-setup.js",
+    "server": "DEBUG=horarios:* nodemon api-server.js"
   },
   "author": "EJCV <weber.cv@gmail.com>",
   "license": "MIT",

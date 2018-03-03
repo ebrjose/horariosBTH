@@ -1,15 +1,15 @@
 'use strict'
-const debug = require('debug')('cinema:db:config')
+const debug = require('debug')('horarios:db:config')
 
 module.exports = {
   db: {
-    database: process.env.DB_NAME || 'cinema',
+    database: process.env.DB_NAME || 'horarios',
     username: process.env.DB_USER || 'pgdev',
     password: process.env.DB_PASS || 'pgdev',
     host: process.env.DB_HOST || 'localhost',
     dialect: 'postgres',
     logging: s => debug(s),
-    setup: false // Sirve para borrar la base de datos
+    setup: true // Sirve para borrar la base de datos
   },
   auth: {
     secret: process.env.SECRET || 'examen'

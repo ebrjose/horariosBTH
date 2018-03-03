@@ -16,4 +16,4 @@ function handleFatalError (err) {
   process.exit(1)
 }
 
-module.exports = setup
+setup()

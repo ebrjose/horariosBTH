@@ -6,20 +6,20 @@ const setupDatabase = require('../lib/db')
 module.exports = (config) => {
   const sequelize = setupDatabase(config)
 
-  const Reservation = sequelize.define('reservation', {
-    reservationId: {
+  const Materia = sequelize.define('materia', {
+    mId: {
       primaryKey: true,
       type: Sequelize.UUID
     },
-    dateStart: {
+    mNombre: {
       type: Sequelize.DATE,
       allowNull: false
     },
-    dateEnd: {
+    mSigla: {
       type: Sequelize.DATE,
-      allowNull: true
+      allowNull: false
     }
   })
 
-  return Reservation
+  return Materia
 }

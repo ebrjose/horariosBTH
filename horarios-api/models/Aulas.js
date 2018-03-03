@@ -6,21 +6,21 @@ const setupDatabase = require('../lib/db')
 module.exports = (config) => {
   const sequelize = setupDatabase(config)
 
-  const Room = sequelize.define('room', {
-    roomId: {
+  const Aula = sequelize.define('aula', {
+    aId: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    roomName: {
+    aName: {
       type: Sequelize.STRING(200),
       allowNull: false
     },
-    roomColor: {
+    aSigla: {
       type: Sequelize.STRING(10),
       allowNull: true
     }
   })
 
-  return Room
+  return Aula
 }

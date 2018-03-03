@@ -1,6 +1,6 @@
 'use strict'
 
-const debug = require('debug')('cinema:api')
+const debug = require('debug')('horarios:api')
 // const setup = require('./db-setup')
 const http = require('http')
 const chalk = require('chalk')
