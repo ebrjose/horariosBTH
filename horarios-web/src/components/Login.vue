@@ -1,3 +1,3 @@
 <template lang="pug">
-  h1 LOGIN
+  h1 LOGINasd
 </template>

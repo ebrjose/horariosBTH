@@ -5,9 +5,11 @@
       img.logo(src='../../assets/logo.png', alt='')
     b-collapse#nav_collapse(is-nav='')
       b-navbar-nav.m-auto
-        b-nav-item(href='#') Usuarios
-        b-nav-item(href='#') Salas
-        b-nav-item(href='#') Reservar
+        b-nav-item(to='/') Inicio
+        b-nav-item(to='docentes') Docentes
+        b-nav-item(to='aulas') Aulas
+        b-nav-item(to='materias') Materias
+        b-nav-item(to='horarios') Horarios
       b-navbar-nav
         b-nav-item(href='#') Salir
 </template>

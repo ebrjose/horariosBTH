@@ -1,22 +1,40 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Login from '@/components/Login.vue'
-import Reservas from '@/components/Reservas.vue'
+import Home from '@/components/Home.vue'
+import Docentes from '@/components/Docentes.vue'
+import Aulas from '@/components/Aulas.vue'
+import Materias from '@/components/Materias.vue'
+import Horarios from '@/components/Horarios.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    name: 'login',
+    name: 'home',
     path: '/',
-    component: Login,
+    component: Home,
     meta: { isPublic: true}
   },
   {
-    name: 'reservas',
-    path: '/reservas',
-    component: Reservas
+    name: 'docentes',
+    path: '/docentes',
+    component: Docentes
+  },
+  {
+    name: 'aulas',
+    path: '/aulas',
+    component: Aulas
+  },
+  {
+    name: 'materias',
+    path: '/materias',
+    component: Materias
+  },
+  {
+    name: 'horarios',
+    path: '/horarios',
+    component: Horarios
   }
 ]
 
