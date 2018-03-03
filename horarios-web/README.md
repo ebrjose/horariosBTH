@@ -1,18 +1,17 @@
-# horarios-web
+### Frontend
 
-> A Vue.js project
+El frontend corre con el Framework Vue.js
 
-## Build Setup
+#### Instalacion
 
 ``` bash
+$ cd horarios-web
 # install dependencies
-npm install
+$ npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
+# Para iniciar la aplicacion en localhost:6800
+$ npm run dev
 
-# build for production with minification
-npm run build
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+La aplicacion corre en el en el puerto **6800**  [http://localhost:6800/](https://localhost:6800/) 
