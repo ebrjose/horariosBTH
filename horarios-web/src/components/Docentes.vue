@@ -26,6 +26,7 @@ div
             ) Listar
 
   
+    
     table.table
       thead
         tr
@@ -34,10 +35,10 @@ div
           td Apellidos
           td 
       tbody
-        tr
-          td s
-          td s
-          td s
+        tr(v-for="d in docentes")
+          td {{ d.dId }}
+          td {{ d.dNombre }}
+          td {{ d.dApellido }}
           td
 </template>
 
@@ -49,18 +50,20 @@ export default {
   data() {
     return {
       docentes: [],
-      dNombre,
-      dApellido
+      dNombre: '',
+      dApellido: ''
     }
-  }
-  ,
+  },
   methods: {
     listar() {
       horariosService.getDocentes()
         .then(res => {
           this.docentes = res
-          console.log(res)
+          console.log(this.docentes)
         })
+    },
+    sub() {
+
     }
   }
 }
