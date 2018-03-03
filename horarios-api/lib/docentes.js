@@ -1,29 +1,31 @@
 'use strict'
+
+const  debug = require('debug')('horarios:lib:docentes')
 module.exports = (DocenteModel) => {
-  async function createOrUpdate (user) {
+  async function createOrUpdate (docente) {
     const cond = {
       where: {
-        userId: user.userId
+        dId: docente.dId
       }
     }
 
-    const existingUser = await UserModel.findOne(cond)
+    const existeDocente = await DocenteModel.findOne(cond)
 
-    if (existingUser) {
-      const updated = await UserModel.update(user, cond)
-      return updated ? UserModel.findOne(cond) : existingUser
+    if (existeDocente) {
+      const updated = await DocenteModel.update(docente, cond)
+      return updated ? DocenteModel.findOne(cond) : existeAula
     }
 
-    const result = await UserModel.create(user)
-    return result.toJSON
+    const result = await DocenteModel.create(docente)
+    return result.toJSON()
   }
 
-  function findById (userId) {
-    return UserModel.findById(userId)
+  function findById (dId) {
+    return DocenteModel.findById(dId)
   }
 
   function findAll () {
-    return UserModel.findAll()
+    return DocenteModel.findAll()
   }
 
   return {

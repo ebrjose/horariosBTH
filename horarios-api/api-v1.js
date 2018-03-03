@@ -3,15 +3,20 @@
 const debug = require('debug')('horarios:api:routes')
 const express = require('express')
 const asyncify = require('express-asyncify')
-const auth = require('express-jwt')
-const guard = require('express-jwt-permissions')()
+const bodyParser = require('body-parser')
+// const auth = require('express-jwt')
+// const guard = require('express-jwt-permissions')()
 const db = require('./db-index')
 
 const config = require('./db-config')
 
 const api = asyncify(express.Router())
 
-let services, User, Room, Reservation
+api.use(bodyParser.json())
+
+let services, Docentes, Aulas, Materias
+
+
 api.use('*', async (req, res, next) => {
   if (!services) {
     debug('Connecting to database')
@@ -21,35 +26,129 @@ api.use('*', async (req, res, next) => {
       return next(e)
     }
 
-    User = services.User
-    // Room = services.Room
-    // Reservation = services.Reservation
+    Docentes = services.Docentes
+    Aulas = services.Aulas
+    Materias = services.Materias
   }
   next()
 })
 
-api.get('/users', auth(config.auth), async (req, res, next) => {
-  debug('A request has come to /users')
+//DOCENTES
+api.get('/docentes', async (req, res, next) => {
+  debug('GET: /docentes')
 
-  const { user } = req
-
-  if (!user || !user.username) {
-    return next(new Error('Not authorized'))
-  }
-
-  let users = [{name: 'Eber'}]
-
+  let docentes
   try {
-    if (user.admin) {
-      users = await User.findAll()
-    } else {
-      users = await User.findById(user.userId)
-    }
+    docentes = await Docentes.findAll()
   } catch (e) {
     return next(e)
   }
 
-  res.send(users)
+  if( docentes.length === 0 ) {
+    res.status(404).send({ 'Error': 'No se encontraron resultados' })
+  }
+  res.status(200).send(docentes)
+})
+api.get('/docentes/:dId', async(req, res, next) => {
+  const { dId } = req.params
+  debug(`GET: /docentes/${dId}`)
+
+  let docente
+  try {
+    docente = await Docentes.findById(dId)
+  } catch (e) {
+    return next(e)
+  }
+
+  if (!docente) {
+    res.status(404).send({'Error': 'No se encontraron resultados'})
+  }
+  res.send(docente)
+})
+
+api.post('/docentes', async (req, res, next) => {
+  debug('POST: /docentes')
+  const docente = req.body
+  const result = await Docentes.createOrUpdate(docente)
+  res.status(201).json(result)
+})
+
+// AULAS
+api.get('/aulas', async (req, res, next) => {
+  debug('GET: /aulas')
+
+  let aulas
+  try {
+    aulas = await Aulas.findAll()
+  } catch (e) {
+    return next(e)
+  }
+
+  if (aulas.length === 0) {
+    res.status(404).send({ 'Error': 'No se encontraron resultados' })
+  }
+  res.status(200).send(aulas)
+})
+
+api.get('/aulas/:aId', async (req, res, next) => {
+  const { aId } = req.params
+  debug(`GET: /aulas/${aId}`)
+  let aula
+  try {
+    aula = await Aulas.findById(aId)
+  } catch (e) {
+    return next(e)
+  }
+  if (!aula) {
+    res.status(404).send({ 'Error': 'No se encontraron resultados' })
+  }
+  res.send(aula)
+})
+
+api.post('/aulas', async (req, res, next) => {
+  debug('POST: /aulas')
+  const aula = req.body
+  const result = await Aulas.createOrUpdate(aula)
+  res.status(201).json(result)
+})
+
+// MATERIAS
+api.get('/materias', async (req, res, next) => {
+  debug('GET: /materias')
+
+  let materias
+  try {
+    materias = await Materias.findAll()
+  } catch (e) {
+    return next(e)
+  }
+
+  if (materias.length === 0) {
+    res.status(404).send({ 'Error': 'No se encontraron resultados' })
+  }
+  res.status(200).send(materias)
+})
+
+api.get('/materias/:mId', async (req, res, next) => {
+  const { mId } = req.params
+  debug(`GET: /materias/${mId}`)
+  let materia
+  try {
+    materia = await Materias.findById(mId)
+  } catch (e) {
+    return next(e)
+  }
+  if (!materia) {
+    res.status(404).send({ 'Error': 'No se encontraron resultados' })
+  }
+  res.send(materia)
+})
+
+api.post('/materias', async (req, res, next) => {
+  debug('POST: /materias')
+  const materia = req.body
+  const result = await Materias.createOrUpdate(materia)
+  res.status(201).json(result)
 })
 
 module.exports = api

@@ -12,7 +12,7 @@ module.exports = (config) => {
       primaryKey: true,
       autoIncrement: true
     },
-    aName: {
+    aNombre: {
       type: Sequelize.STRING(200),
       allowNull: false
     },

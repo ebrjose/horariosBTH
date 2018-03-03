@@ -9,7 +9,7 @@ module.exports = {
     host: process.env.DB_HOST || 'localhost',
     dialect: 'postgres',
     logging: s => debug(s),
-    setup: true // Sirve para borrar la base de datos
+    setup: false // Sirve para borrar la base de datos
   },
   auth: {
     secret: process.env.SECRET || 'examen'
